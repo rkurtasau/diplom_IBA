@@ -7,7 +7,7 @@ resource "aws_vpc" "main_vpc" {
 
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.main_vpc.id
-  depends_on = [aws_vpc.main.vpc]
+  depends_on = [aws_vpc.main_vpc]
 } 
 
 resource "aws_subnet" "public_subnet" {
