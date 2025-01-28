@@ -12,6 +12,9 @@ resource "null_resource" "vpc_flow_logs" {
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id     = aws_vpc.main_vpc.id
   depends_on = [aws_vpc.main_vpc]
+  tags = {
+    Name = "Internet Gateway"
+  }
 }
 
 resource "aws_route_table" "route_table" {
