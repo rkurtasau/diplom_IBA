@@ -1,7 +1,7 @@
-resource "aws_s3_bucket" "main_s3_bucket" {
-  bucket = "main_s3_bucket"
+resource "aws_s3_bucket" "amazon_bucket" {
+  bucket = "amazon-bucket-sss-2892"
 
   tags = {
-    Name        = "s3bucket"
+    Name        = "amazon-bucket-sss-2892"
   }
 }
