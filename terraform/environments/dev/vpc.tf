@@ -40,8 +40,8 @@ resource "aws_subnet" "public_subnet" {
 
 resource "aws_route_table_association" "public_associate" {
   subnet_id      = aws_subnet.public_subnet.id
-  route_table_id = aws_route_table.route_table.id
-  depends_on     = [aws_route_table.route_table, aws_subnet.public_subnet]
+  route_table_id = aws_route_table.public_rt.id
+  depends_on     = [aws_route_table.public_rt, aws_subnet.public_subnet]
 }
 
 resource "aws_route_table" "private_rt" {
