@@ -17,7 +17,7 @@ resource "aws_internet_gateway" "internet_gateway" {
   }
 }
 
-resource "aws_route_table" "route_table" {
+resource "aws_route_table" "public_rt" {
   vpc_id     = aws_vpc.main_vpc.id
   depends_on = [aws_vpc.main_vpc]
   route {
@@ -29,19 +29,21 @@ resource "aws_route_table" "route_table" {
   }
 }
 
-resource "aws_route_table_association" "public_route" {
-  subnet_id      = aws_subnet.public_subnet.id
-  route_table_id = aws_route_table.route_table.id
-  depends_on     = [aws_route_table.route_table]
-}
-
 resource "aws_subnet" "public_subnet" {
   vpc_id     = aws_vpc.main_vpc.id
   cidr_block = "10.0.1.0/26"
   depends_on = [aws_vpc.main_vpc]
-  tags = {
+  tags = { 
     Name = "Public Subnet"
   }
 }
 
+resource "aws_route_table_association" "public_associate" {
+  subnet_id      = aws_subnet.public_subnet.id
+  route_table_id = aws_route_table.route_table.id
+  depends_on     = [aws_route_table.route_table, aws_subnet.public_subnet]
+}
 
+resource "aws_route_table" "private_rt" {
+  vpc_id = aws_vpc.main_vpc.id
+}
